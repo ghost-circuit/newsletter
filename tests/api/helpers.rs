@@ -1,15 +1,15 @@
 use argon2::password_hash::SaltString;
 use argon2::{Algorithm, Argon2, Params, PasswordHasher, Version};
-use secrecy::Secret;
-use sqlx::{Connection, Executor, PgConnection, PgPool};
-use std::sync::LazyLock;
-use uuid::Uuid;
-use wiremock::MockServer;
 use newsletter::configuration::{get_configuration, DatabaseSettings};
 use newsletter::email_client::EmailClient;
 use newsletter::issue_delivery_worker::{try_execute_task, ExecutionOutcome};
 use newsletter::startup::{get_connection_pool, Application};
 use newsletter::telemetry::{get_subscriber, init_subscriber};
+use secrecy::Secret;
+use sqlx::{Connection, Executor, PgConnection, PgPool};
+use std::sync::LazyLock;
+use uuid::Uuid;
+use wiremock::MockServer;
 
 // Ensure that the `tracing` stack is only initialised once using `once_cell`
 static TRACING: LazyLock<()> = LazyLock::new(|| {
